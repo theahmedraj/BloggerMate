@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'blog/alert.html' %}
+
+<div class="jumbotron p-4 p-md-5 text-black  bg-light">
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <ul class="nav mb-2">
+                <li class="nav-item mt-1">
+                    <img src="/static/avatar2.png" alt="Avatar" class="rounded-circle account-image float-left" style="width:40px;height:40px;"></li>
+
+                </li>
+                <li class="nav-item">
+                    <span class=" mb-1 text-secondary ml-2 ">{{post.author|capfirst}}</span>
+                    <div class="mb-1 text-secondary ml-2 ">{{post.created}}</div>
+                </li>
+
+            </ul>
+
+
+            <h3 class="mb-0 text-center mb-4">{{post.title}}</h3>
+
+
+            <p class="card-text mb-auto ">{{post.body|safe}} </p>
+
+
+        </div>
+
+    </div>
+    {% if post.author == request.user %}
+    <a role="button" href="{% url 'post_edit' id=post.id %}" class="btn btn-outline-success">Update</a>
+    <a role="button" href="{% url 'post_delete' id=post.id %}" class="btn btn-outline-danger"id="delete">Delete</a>
+    {% endif %}
+</div>
+
+{% endblock %}
